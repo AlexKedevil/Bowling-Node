@@ -1,21 +1,21 @@
 const prompt = require('prompt-sync')({ sigint: true });
 
 class Player {
-    constructor(name) {
-      this.name = name;
-      this.frames = Array.from({ length: 10 }, () => [null, null]);
-      this.extraRolls = [];
-    }
-  
-    roll(frameIndex, rollIndex, pins) {
-      if (frameIndex < 10) {
-        this.frames[frameIndex][rollIndex] = pins; 
-      } else {
-        this.extraRolls.push(pins); 
-      }
+  constructor(name) {
+    this.name = name;
+    this.frames = Array.from({ length: 10 }, () => [null, null]);
+    this.extraRolls = [];
+  }
+
+  roll(frameIndex, rollIndex, pins) {
+    if (frameIndex < 10) {
+      this.frames[frameIndex][rollIndex] = pins;
+    } else {
+      this.extraRolls.push(pins);
     }
   }
-  
+}
+
 function startGame() {
   console.log("Démarrez une nouvelle partie de bowling.");
   const numPlayers = parseInt(prompt("Entrez le nombre de joueurs: "));
@@ -35,7 +35,7 @@ function startGame() {
       }
     } while (/^\d+$/.test(name));
 
-    players.push({ name, score: 0 });
+    players.push(new Player(name));
   }
 
   console.log("Joueurs enregistrés:", players.map(player => player.name).join(", "));
