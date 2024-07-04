@@ -105,6 +105,20 @@ class Player {
         console.log(`${player.name}: ${player.calculateScore()}`);
       });
     }
+  
+    console.log("Score final:");
+    players.forEach(player => {
+      console.log(`${player.name}: ${player.calculateScore()}`);
+    });
+  
+    const highestScore = Math.max(...players.map(player => player.calculateScore()));
+    const winners = players.filter(player => player.calculateScore() === highestScore);
+  
+    if (winners.length > 1) {
+      console.log("Les gagnants sont:", winners.map(player => player.name).join(", "));
+    } else {
+      console.log("Le gagnant est:", winners[0].name);
+    }
   }
   
   startGame();
